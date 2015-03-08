@@ -1,9 +1,13 @@
+library(stringr)
+Sys.setlocale("LC_TIME", "English")
+
 data<-read.table("household_power_consumption.txt",sep=";",na.string="?",header=TRUE)
 p4<-data[(data$Date=="1/2/2007" | data$Date=="2/2/2007" ),]
 
 p4$DT<-strptime(paste(str_trim(p4$Date),str_trim(p4$Time),sep=" "),format="%d/%m/%Y %H:%M:%S")
 
 par(mfrow=c(2,2),cex.lab=0.8,cex.axis=0.8)
+
 ##upper left plot
 plot(p4$DT,p4$Global_active_power,pch=46,ylab="Global Active Power",xlab="")
 lines(p4$DT,p4$Global_active_power)
